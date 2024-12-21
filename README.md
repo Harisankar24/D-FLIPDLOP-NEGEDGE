@@ -29,16 +29,77 @@ Next state of D flip-flop is always equal to data input, D for every positive tr
 **Procedure**
 
 /* write all the steps invloved */
+ALGORITM: 
+Step1: Define the specifications and initialize the design. 
+Step2: Declare the name of the entity and architecture by using VHDL source code. 
+Step3: Write the source code in VERILOG. 
+Step4: Check the syntax and debug the errors if found, obtain the synthesis report. 
+Step5: Verify the output by simulating the source code. 
+Step6: Write all possible combinations of input using the test bench. 
+Step7: Obtain the place and route report. 
 
 **PROGRAM**
 
 /* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
 */
+module exp8(a,clk,z); 
+    input a; 
+    input clk; 
+    output z; 
+  reg z; 
+   
+  parameter st0=0,st1=1,st2=2,st3=3; 
+  reg[0:1]moore_state; 
+  initial 
+  begin 
+  moore_state=st0; 
+  end 
+  always @ (posedge(clk)) 
+  case(moore_state) 
+  st0: 
+  begin 
+  z=1; 
+  if(a)  
+  moore_state=st2; 
+  end 
+ 
+  st1: 
+  begin 
+  z=0; 
+  if(a) 
+  moore_state=st3;  
+  end 
+ 
+  st2: 
+  begin 
+  z=0; 
+  if(~a) 
+  moore_state=st1; 
+  else 
+  moore_state=st3;  
+  end 
+ 
+  st3: 
+  begin 
+  z=1; 
+  if(a)  
+  moore_state=st0;  
+  end 
+  endcase 
+  endmodule 
 
 **RTL LOGIC FOR FLIPFLOPS**
+![Screenshot 2024-12-21 093234](https://github.com/user-attachments/assets/2c6c988f-03b6-427f-b4b0-2ddd72316914)
+
+
 
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
+![Screenshot 2024-12-21 093410](https://github.com/user-attachments/assets/62a0b88b-0d26-43d1-ad14-cc22fa489304)
+
 
 
 **RESULTS**
+Thus the OUTPUT’s of Moore and Mealy fsm are verified by synthesizing and simulating the 
+VHDL and VERILOG code. 
+
